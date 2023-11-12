@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center justify-center gap-x-2">
       <a
         href="/rank"
         className="rounded-full p-4 hover:bg-purple-200 hover:text-black"
