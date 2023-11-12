@@ -66,7 +66,7 @@ export default function VillagerList() {
       {getVillagers.hasNextPage && (
         <div className="mx-auto pt-4">
           <button
-            className="rounded-full bg-purple-200 p-4 text-xl font-semibold text-black hover:bg-purple-300"
+            className="rounded-full bg-purple-200 p-4 text-center text-xl font-semibold text-black hover:bg-purple-300"
             disabled={getVillagers.isFetching || getVillagers.isLoading}
             onClick={() => getVillagers.fetchNextPage()}
           >

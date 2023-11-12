@@ -12,7 +12,7 @@ export default function Home() {
       </h1>
       <a
         href="/rank"
-        className="rounded-full bg-purple-200 p-4 text-xl font-semibold text-black hover:bg-purple-300"
+        className="rounded-full bg-purple-200 p-4 text-center text-xl font-semibold text-black hover:bg-purple-300"
       >
         Click Here to Start Ranking
       </a>
