@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useRef } from "react";
+import { Fragment } from "react";
 import { api } from "~/trpc/react";
 
 export default function VillagerList() {
@@ -9,21 +9,6 @@ export default function VillagerList() {
       limit: 50,
     },
     { getNextPageParam: (lastPage) => lastPage.nextCursor },
-  );
-
-  const observer = useRef<IntersectionObserver | undefined>();
-  const nextPageRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (getVillagers.isLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting && getVillagers.hasNextPage) {
-          getVillagers.fetchNextPage();
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [getVillagers],
   );
 
   return (
@@ -78,9 +63,17 @@ export default function VillagerList() {
             </Fragment>
           ))}
       </div>
-      <div ref={nextPageRef} className="mx-auto pt-4">
-        {getVillagers.hasNextPage && `Loading More...`}
-      </div>
+      {getVillagers.hasNextPage && (
+        <div className="mx-auto pt-4">
+          <button
+            className="rounded-full bg-purple-200 p-4 text-xl font-semibold text-black hover:bg-purple-300"
+            disabled={getVillagers.isFetching || getVillagers.isLoading}
+            onClick={() => getVillagers.fetchNextPage()}
+          >
+            {getVillagers.isFetchingNextPage ? `Loading More...` : `Load More`}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
