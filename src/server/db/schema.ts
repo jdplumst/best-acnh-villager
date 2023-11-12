@@ -17,7 +17,7 @@ import {
  */
 export const pgTable = pgTableCreator((name) => `best-acnh-villager_${name}`);
 
-export const posts = pgTable(
+export const villager = pgTable(
   "villager",
   {
     id: serial("id").primaryKey(),
