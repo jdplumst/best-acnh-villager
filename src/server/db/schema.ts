@@ -1,14 +1,13 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
 import {
-  bigint,
   index,
-  mysqlTableCreator,
-  timestamp,
+  pgTableCreator,
+  serial,
+  text,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -16,19 +15,72 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const mysqlTable = mysqlTableCreator((name) => `best-acnh-villager_${name}`);
+export const pgTable = pgTableCreator((name) => `best-acnh-villager_${name}`);
 
-export const posts = mysqlTable(
-  "post",
+export const posts = pgTable(
+  "villager",
   {
-    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt").onUpdateNow(),
+    icon: text("icon").notNull(),
+    photo: text("photo").notNull(),
+    species: varchar("species", {
+      enum: [
+        "alligator",
+        "anteater",
+        "bear",
+        "bird",
+        "bull",
+        "cat",
+        "chicken",
+        "cow",
+        "cub",
+        "deer",
+        "dog",
+        "duck",
+        "eagle",
+        "elephant",
+        "frog",
+        "goat",
+        "gorilla",
+        "hamster",
+        "hippo",
+        "horse",
+        "kangaroo",
+        "koala",
+        "lion",
+        "monkey",
+        "mouse",
+        "octopus",
+        "ostrich",
+        "penguin",
+        "pig",
+        "rhino",
+        "sheep",
+        "squirrel",
+        "tiger",
+        "wolf",
+      ],
+    }).notNull(),
+    gender: varchar("gender", {
+      length: 10,
+      enum: ["male", "female"],
+    }).notNull(),
+    personality: varchar("personality", {
+      length: 256,
+      enum: ["lazy", "normal", "peppy", "jock", "cranky", "snooty"],
+    }).notNull(),
+    subtype: varchar("subtype", { length: 2, enum: ["A", "B"] }).notNull(),
+    hobby: varchar("hobby", {
+      length: 256,
+      enum: ["Education", "Fashion", "Fitness", "Music", "Nature", "Play"],
+    }).notNull(),
+    birthday: varchar("birthday", { length: 256 }).notNull(),
+    catchphrase: varchar("catchphrase", { length: 256 }).notNull(),
+    song: varchar("song", { length: 256 }).notNull(),
+    saying: text("saying").notNull(),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
+  (table) => ({
+    nameIndex: index("name_idx").on(table.name),
+  }),
 );
