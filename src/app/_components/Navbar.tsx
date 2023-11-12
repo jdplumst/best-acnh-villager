@@ -1,4 +1,4 @@
-export default function Footer() {
+export default function Navbar() {
   return (
     <div className="grid grid-cols-6 items-center justify-items-start gap-x-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center">
       <a

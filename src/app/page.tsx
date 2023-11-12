@@ -1,4 +1,4 @@
-import Footer from "./_components/Footer";
+import Navbar from "./_components/Navbar";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       >
         Click Here to Start Ranking
       </a>
-      <Footer></Footer>
+      <Navbar />
     </main>
   );
 }
