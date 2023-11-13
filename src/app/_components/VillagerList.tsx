@@ -21,12 +21,12 @@ export default function VillagerList() {
         onChange={(e) => {
           setName((e.target as HTMLInputElement).value);
         }}
-        className="rounded-lg border-2 border-black p-2 text-center text-black outline-none sm:w-1/2"
+        className="rounded-lg border-2 border-black p-2 text-center text-black outline-none md:w-96 xl:w-[520px] 2xl:w-[750px]"
       />
       {getVillagers.isInitialLoading && (
         <div className="mx-auto">Loading...</div>
       )}
-      <div className="grid min-h-screen w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid min-h-screen grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {getVillagers.isSuccess &&
           getVillagers.data?.pages.map((p) => (
             <Fragment key={p.nextCursor}>
