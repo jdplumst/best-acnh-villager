@@ -26,18 +26,18 @@ export default function VillagerList() {
       {getVillagers.isInitialLoading && (
         <div className="mx-auto">Loading...</div>
       )}
-      <div className="grid min-h-screen w-screen grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid min-h-screen w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {getVillagers.isSuccess &&
           getVillagers.data?.pages.map((p) => (
             <Fragment key={p.nextCursor}>
               {p.villagers.map((v) => (
                 <div
                   key={v.id}
-                  className="flex flex-col items-center gap-2 rounded-lg border-2 border-black bg-gray-800 p-4"
+                  className="flex max-h-[560px] flex-col items-center gap-2 rounded-lg border-2 border-black bg-gray-800 p-4"
                 >
                   <img src={v.photo} alt={`${v.name}'s photo`} />
                   <div className="text-lg font-semibold">{v.name}</div>
-                  <div className="grid w-80 grid-cols-2 gap-x-5">
+                  <div className="grid w-72 grid-cols-2 gap-x-5">
                     <div>
                       <span className="font-medium">Species: </span>
                       {v.species}
