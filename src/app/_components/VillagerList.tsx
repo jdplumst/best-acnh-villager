@@ -1,19 +1,32 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { api } from "~/trpc/react";
 
 export default function VillagerList() {
+  const [name, setName] = useState<string | null>(null);
+
   const getVillagers = api.villager.getVillagers.useInfiniteQuery(
     {
+      name: name,
       limit: 50,
     },
     { getNextPageParam: (lastPage) => lastPage.nextCursor },
   );
 
   return (
-    <div className="flex flex-col py-8">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="flex flex-col items-center gap-4 py-8">
+      <input
+        value={name ?? ""}
+        onChange={(e) => {
+          setName((e.target as HTMLInputElement).value);
+        }}
+        className="rounded-lg border-2 border-black p-2 text-center text-black outline-none sm:w-1/2"
+      />
+      {getVillagers.isInitialLoading && (
+        <div className="mx-auto">Loading...</div>
+      )}
+      <div className="grid min-h-screen w-screen grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {getVillagers.isSuccess &&
           getVillagers.data?.pages.map((p) => (
             <Fragment key={p.nextCursor}>

@@ -4,4 +4,6 @@ import postgres from "postgres";
 
 const connectionString = env.DATABASE_URL;
 const client = postgres(connectionString);
-export const db = drizzle(client);
+export const db = drizzle(client, {
+  logger: env.NODE_ENV === "development",
+});
