@@ -22,7 +22,7 @@ export const villager = pgTable(
   "villager",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    name: varchar("name", { length: 256 }).notNull(),
     icon: text("icon").notNull(),
     photo: text("photo").notNull(),
     species: varchar("species", {
