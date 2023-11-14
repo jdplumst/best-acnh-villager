@@ -33,4 +33,15 @@ export const villagerRouter = createTRPCRouter({
       }
       return { villagers, nextCursor };
     }),
+
+  getMatchup: publicProcedure.query(async ({ ctx }) => {
+    const villagers = await ctx.db
+      .select({ id: villager.id, name: villager.name, photo: villager.photo })
+      .from(villager);
+    const villager1 = villagers[Math.floor(Math.random() * villagers.length)];
+    const villager2 = villagers.filter((v) => v.id !== villager1?.id)[
+      Math.floor(Math.random() * villagers.length - 1)
+    ];
+    return { villager1, villager2 };
+  }),
 });
