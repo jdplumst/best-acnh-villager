@@ -6,8 +6,8 @@ export default function Matchup() {
   const getMatchup = api.villager.getMatchup.useQuery();
 
   const vote = api.villager.vote.useMutation({
-    onSuccess() {
-      getMatchup.refetch();
+    async onSuccess() {
+      await getMatchup.refetch();
     },
   });
 
@@ -18,7 +18,10 @@ export default function Matchup() {
   return (
     <div className="flex items-center justify-evenly gap-5 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20">
       <div className="flex flex-col items-center gap-5 rounded-lg border-2 border-black bg-gray-800 p-4">
-        <img src={getMatchup.data.villager1.photo} />
+        <img
+          src={getMatchup.data.villager1.photo}
+          alt={getMatchup.data.villager1.name}
+        />
         <div className="text-xl font-medium">
           {getMatchup.data.villager1.name}
         </div>
@@ -36,7 +39,10 @@ export default function Matchup() {
       </div>
       <div className="text-2xl font-medium sm:text-3xl lg:text-4xl">vs.</div>
       <div className="flex flex-col items-center gap-5 rounded-lg border-2 border-black bg-gray-800 p-4">
-        <img src={getMatchup.data.villager2.photo} />
+        <img
+          src={getMatchup.data.villager2.photo}
+          alt={getMatchup.data.villager2.name}
+        />
         <div className="text-xl font-medium">
           {getMatchup.data.villager2.name}
         </div>
