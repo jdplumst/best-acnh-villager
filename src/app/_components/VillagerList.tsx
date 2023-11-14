@@ -37,7 +37,7 @@ export default function VillagerList() {
                 >
                   <img src={v.photo} alt={`${v.name}'s photo`} />
                   <div className="text-lg font-semibold">{v.name}</div>
-                  <div className="grid w-72 grid-cols-2 gap-x-5">
+                  <div className="grid w-[330px] grid-cols-2 gap-x-5">
                     <div>
                       <span className="font-medium">Species: </span>
                       {v.species}
