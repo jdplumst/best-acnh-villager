@@ -3,6 +3,7 @@
 
 import {
   index,
+  integer,
   pgTableCreator,
   serial,
   text,
@@ -79,6 +80,9 @@ export const villager = pgTable(
     catchphrase: varchar("catchphrase", { length: 256 }).notNull(),
     song: varchar("song", { length: 256 }).notNull(),
     saying: text("saying").notNull(),
+    votesFor: integer("votesFor").default(0).notNull(),
+    votesAgainst: integer("votesAgainst").default(0).notNull(),
+    rating: integer("rating").default(1000).notNull(),
   },
   (table) => ({
     nameIndex: index("name_idx").on(table.name),
