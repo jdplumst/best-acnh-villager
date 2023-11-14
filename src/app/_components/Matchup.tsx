@@ -53,7 +53,7 @@ export default function Matchup() {
               voteAgainstId: getMatchup.data.villager1.id,
             });
           }}
-          className="rounded-full bg-purple-200 p-2 text-center font-medium text-black sm:p-4 sm:font-semibold md:text-xl"
+          className="rounded-full bg-purple-200 p-2 text-center font-medium text-black hover:bg-purple-300 sm:p-4 sm:font-semibold md:text-xl"
         >
           Vote
         </button>
