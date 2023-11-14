@@ -77,8 +77,8 @@ export const villagerRouter = createTRPCRouter({
         1 / (1 + 10 ** ((villager2.rating - villager1.rating) / 400));
       const expected2 =
         1 / (1 + 10 ** ((villager1.rating - villager2.rating) / 400));
-      const newRating1 = villager1.rating + 32 * (1 - expected1);
-      const newRating2 = villager1.rating + 32 * (0 - expected2);
+      const newRating1 = Math.round(villager1.rating + 32 * (1 - expected1));
+      const newRating2 = Math.round(villager2.rating + 32 * (0 - expected2));
       try {
         await ctx.db.transaction(async (tx) => {
           await tx
