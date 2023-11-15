@@ -20,7 +20,7 @@ export default function Matchup() {
       <div className="flex flex-col items-center gap-5 rounded-lg border-2 border-black bg-gray-800 p-4">
         <img
           src={getMatchup.data.villager1.photo}
-          alt={getMatchup.data.villager1.name}
+          alt={`${getMatchup.data.villager1.name}'s photo`}
         />
         <div className="text-xl font-medium">
           {getMatchup.data.villager1.name}
@@ -41,7 +41,7 @@ export default function Matchup() {
       <div className="flex flex-col items-center gap-5 rounded-lg border-2 border-black bg-gray-800 p-4">
         <img
           src={getMatchup.data.villager2.photo}
-          alt={getMatchup.data.villager2.name}
+          alt={`${getMatchup.data.villager2.name}'s photo`}
         />
         <div className="text-xl font-medium">
           {getMatchup.data.villager2.name}

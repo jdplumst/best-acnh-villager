@@ -105,6 +105,7 @@ export const villagerRouter = createTRPCRouter({
   getLeaderboard: publicProcedure.query(async ({ ctx }) => {
     const villagers = await ctx.db
       .select({
+        id: villager.id,
         name: villager.name,
         icon: villager.icon,
         votesFor: villager.votesFor,
@@ -125,6 +126,6 @@ export const villagerRouter = createTRPCRouter({
           : Math.round((v.votesFor / (v.votesFor + v.votesAgainst)) * 100),
       ...v,
     }));
-    return { leaderboard };
+    return leaderboard;
   }),
 });
