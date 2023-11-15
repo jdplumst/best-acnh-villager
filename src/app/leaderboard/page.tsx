@@ -30,12 +30,12 @@ export default async function Leaderboard() {
             </th>
           </tr>
         </thead>
-        <tbody className="text-center text-sm sm:text-xl sm:font-medium">
+        <tbody className="text-center text-xs sm:text-xl sm:font-medium">
           {leaderboard.map((v) => (
             <tr key={v.id}>
               <td className="border-2 border-black sm:p-4">{v.rank}</td>
               <td className="border-2 border-black sm:p-4">
-                <div className="flex items-center gap-x-2">
+                <div className="flex items-center sm:gap-x-2">
                   <img src={v.icon} alt={`${v.name}'s icon`} width={24} />
                   {v.name}
                 </div>
@@ -43,7 +43,7 @@ export default async function Leaderboard() {
               <td className="border-2 border-black sm:p-4">{v.rating}</td>
               <td className="border-2 border-black sm:p-4">{v.votesFor}</td>
               <td className="border-2 border-black sm:p-4">{v.votesAgainst}</td>
-              <td className="border-2 border-black sm:p-4">{v.winRate}</td>
+              <td className="border-2 border-black sm:p-4">{v.winRate}%</td>
             </tr>
           ))}
         </tbody>
