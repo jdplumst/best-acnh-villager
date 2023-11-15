@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { and, eq, gte, ilike, or } from "drizzle-orm";
+import { and, desc, eq, gte, ilike, or } from "drizzle-orm";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -101,4 +101,30 @@ export const villagerRouter = createTRPCRouter({
       }
       return { message: "Vote success" };
     }),
+
+  getLeaderboard: publicProcedure.query(async ({ ctx }) => {
+    const villagers = await ctx.db
+      .select({
+        name: villager.name,
+        icon: villager.icon,
+        votesFor: villager.votesFor,
+        votesAgainst: villager.votesAgainst,
+        rating: villager.rating,
+      })
+      .from(villager)
+      .orderBy(desc(villager.rating));
+    let rank = 1;
+    const leaderboard = villagers.map((v, index) => ({
+      rank:
+        index > 0 && villagers[index - 1]?.rating === v.rating
+          ? rank
+          : (rank = index + 1),
+      winRate:
+        v.votesFor + v.votesAgainst === 0
+          ? 0
+          : Math.round((v.votesFor / (v.votesFor + v.votesAgainst)) * 100),
+      ...v,
+    }));
+    return { leaderboard };
+  }),
 });
