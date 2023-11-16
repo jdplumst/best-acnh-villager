@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
-import { and, desc, eq, gte, ilike, or } from "drizzle-orm";
-import { z } from "zod";
+import { InferInsertModel, and, desc, eq, gte, ilike, or } from "drizzle-orm";
+import { number, z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { villager } from "~/server/db/schema";
@@ -127,5 +127,88 @@ export const villagerRouter = createTRPCRouter({
       ...v,
     }));
     return leaderboard;
+  }),
+
+  getStatistics: publicProcedure.query(async ({ ctx }) => {
+    const villagers = await ctx.db
+      .select({
+        species: villager.species,
+        gender: villager.gender,
+        personality: villager.personality,
+        subtype: villager.subtype,
+        rating: villager.rating,
+      })
+      .from(villager);
+
+    interface Stats {
+      [key: string]: { ratingSum: number; count: number };
+    }
+
+    interface ComputedStats {
+      [key: string]: number;
+    }
+
+    let speciesStats: Stats = {};
+    villagers.forEach((v) => {
+      if (!speciesStats.hasOwnProperty(v.species)) {
+        speciesStats[v.species] = { ratingSum: 0, count: 0 };
+      }
+      speciesStats[v.species]!["ratingSum"] += v.rating;
+      speciesStats[v.species]!["count"] += 1;
+    });
+    let speciesData: ComputedStats = {};
+    for (const s in speciesStats) {
+      speciesData[s] =
+        speciesStats[s]!["ratingSum"] / speciesStats[s]!["count"];
+    }
+
+    let genderStats: Stats = {};
+    villagers.forEach((v) => {
+      if (!genderStats.hasOwnProperty(v.gender)) {
+        genderStats[v.gender] = { ratingSum: 0, count: 0 };
+      }
+      genderStats[v.gender]!["ratingSum"] += v.rating;
+      genderStats[v.gender]!["count"] += 1;
+    });
+    let genderData: ComputedStats = {};
+    for (const g in genderStats) {
+      genderData[g] = genderStats[g]!["ratingSum"] / genderStats[g]!["count"];
+    }
+
+    let personalityStats: Stats = {};
+    villagers.forEach((v) => {
+      if (!personalityStats.hasOwnProperty(v.personality)) {
+        personalityStats[v.personality] = { ratingSum: 0, count: 0 };
+      }
+      personalityStats[v.personality]!["ratingSum"] += v.rating;
+      personalityStats[v.personality]!["count"] += 1;
+    });
+    let personalityData: ComputedStats = {};
+    for (const p in personalityStats) {
+      personalityData[p] =
+        personalityStats[p]!["ratingSum"] / personalityStats[p]!["count"];
+    }
+
+    let subtypeStats: Stats = {};
+    villagers.forEach((v) => {
+      if (!subtypeStats.hasOwnProperty(v.subtype)) {
+        subtypeStats[v.subtype] = { ratingSum: 0, count: 0 };
+      }
+      subtypeStats[v.subtype]!["ratingSum"] += v.rating;
+      subtypeStats[v.subtype]!["count"] += 1;
+    });
+    let subtypeData: ComputedStats = {};
+    for (const s in subtypeStats) {
+      subtypeData[s] =
+        subtypeStats[s]!["ratingSum"] / subtypeStats[s]!["count"];
+    }
+
+    const statistics = [
+      { title: "Species", data: speciesData },
+      { title: "Gender", data: genderData },
+      { title: "Personality", data: personalityData },
+      { title: "Subtype", data: subtypeData },
+    ];
+    return statistics;
   }),
 });
