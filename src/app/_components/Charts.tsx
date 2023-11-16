@@ -33,8 +33,11 @@ export default function Charts() {
   };
 
   const statistics = api.villager.getStatistics.useQuery();
-  if (statistics.error) return;
-  if (statistics.isLoading) return;
+
+  if (statistics.error) return <div>Error</div>;
+
+  if (statistics.isLoading) return <div>Loading...</div>;
+
   return (
     <div className="flex w-4/5 flex-col items-center gap-y-10">
       {statistics.data.map((s) => (
