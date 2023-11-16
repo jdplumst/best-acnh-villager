@@ -25,8 +25,8 @@ export default function Charts() {
   const randomNum = () => Math.floor(Math.random() * 255);
   const randomRGB = () => `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
   const randomColourList = (l: number) => {
-    let list = [];
-    for (var i = 0; i < l; i++) {
+    const list = [];
+    for (let i = 0; i < l; i++) {
       list.push(randomRGB());
     }
     return list;
@@ -39,6 +39,7 @@ export default function Charts() {
     <div className="flex w-4/5 flex-col items-center gap-y-10">
       {statistics.data.map((s) => (
         <Bar
+          key={s.title}
           data={{
             labels: Object.keys(s.data),
             datasets: [
