@@ -35,7 +35,11 @@ export default function VillagerList() {
                   key={v.id}
                   className="flex max-h-[560px] flex-col items-center gap-2 rounded-lg border-2 border-black bg-gray-800 p-4"
                 >
-                  <img src={v.photo} alt={`${v.name}'s photo`} />
+                  <img
+                    src={v.photo}
+                    alt={`${v.name}'s photo`}
+                    className="w-36 sm:w-64"
+                  />
                   <div className="text-lg font-semibold">{v.name}</div>
                   <div className="grid w-[330px] grid-cols-2 gap-x-5">
                     <div>

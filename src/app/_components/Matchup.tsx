@@ -21,6 +21,7 @@ export default function Matchup() {
         <img
           src={getMatchup.data.villager1.photo}
           alt={`${getMatchup.data.villager1.name}'s photo`}
+          className="w-36 sm:w-64"
         />
         <div className="text-xl font-medium">
           {getMatchup.data.villager1.name}
@@ -42,6 +43,7 @@ export default function Matchup() {
         <img
           src={getMatchup.data.villager2.photo}
           alt={`${getMatchup.data.villager2.name}'s photo`}
+          className="w-36 sm:w-64"
         />
         <div className="text-xl font-medium">
           {getMatchup.data.villager2.name}
