@@ -8,6 +8,7 @@ This is an app for ranking all the Animal Crossing: New Horizons villagers based
 
 - Next.js
 - React
+- TypeScript
 - Tailwind CSS
 - Drizzle
 - PostgreSQL with Supabase
