@@ -1,5 +1,13 @@
+import { Metadata } from "next";
 import Matchup from "../_components/Matchup";
 import Navbar from "../_components/Navbar";
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: "Best ACNH Villager - Rank",
+    icons: [{ rel: "icon", url: "/favicon.ico" }],
+  };
+};
 
 export default function Rank() {
   return (

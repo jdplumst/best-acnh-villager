@@ -1,5 +1,13 @@
 import Navbar from "../_components/Navbar";
 import Charts from "../_components/Charts";
+import { Metadata } from "next";
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: "Best ACNH Villager - Statistics",
+    icons: [{ rel: "icon", url: "/favicon.ico" }],
+  };
+};
 
 export default function Statistics() {
   return (

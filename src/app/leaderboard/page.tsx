@@ -1,5 +1,13 @@
 import { api } from "~/trpc/server";
 import Navbar from "../_components/Navbar";
+import { Metadata } from "next";
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: "Best ACNH Villager - Leaderboard",
+    icons: [{ rel: "icon", url: "/favicon.ico" }],
+  };
+};
 
 export default async function Leaderboard() {
   const leaderboard = await api.villager.getLeaderboard.query();
