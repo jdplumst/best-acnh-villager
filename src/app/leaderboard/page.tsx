@@ -1,6 +1,6 @@
 import { api } from "~/trpc/server";
 import Navbar from "../_components/Navbar";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
   return {

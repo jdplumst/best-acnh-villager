@@ -1,6 +1,6 @@
 import Navbar from "../_components/Navbar";
 import Charts from "../_components/Charts";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
   return {

@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import Navbar from "../_components/Navbar";
 import VillagerList from "../_components/VillagerList";
 

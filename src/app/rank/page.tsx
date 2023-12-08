@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import Matchup from "../_components/Matchup";
 import Navbar from "../_components/Navbar";
 
